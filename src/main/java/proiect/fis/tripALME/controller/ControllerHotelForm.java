@@ -2,8 +2,15 @@ package proiect.fis.tripALME.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class ControllerHotelForm {
 
@@ -11,7 +18,7 @@ public class ControllerHotelForm {
     private TextField username;
 
     @FXML
-    private PasswordField password;
+    private TextField password;
 
     @FXML
     private TextField email;
@@ -23,8 +30,33 @@ public class ControllerHotelForm {
     private TextField address;
 
     @FXML
-    void register(ActionEvent event) {
+    private Button register;
+
+    @FXML
+    private Label lbl;
+
+    JSONArray list = new JSONArray();
+    @FXML
+    public void Login(ActionEvent event) {
+
+        lbl.setText("YES");
+        JSONObject obj = new JSONObject();
+        obj.put("NAME",username.getText());
+        obj.put("email",email.getText());
+
+
+        list.add(obj);
+
+
+        try (FileWriter file = new FileWriter("src/main/java/data/data.json")) {
+
+            file.write(list.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
-
 }
+
