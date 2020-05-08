@@ -39,7 +39,7 @@ public class ControllerHotelForm {
         obj.put("NAME",username.getText());
         obj.put("email",email.getText());
         obj.put("hotelName",hotelName.getText());
-        obj.put("address", adress.getText());
+        obj.put("adress", adress.getText());
 
 
 
