@@ -102,6 +102,8 @@ public class RegistrationFormController {
 
         if(id_Client.isSelected())
             role="client";
+        if(id_Hotel.isSelected())
+            role="manager";
         try {
             UserService.addUser(username.getText(), password.getText(), email.getText(), address.getText(), hotelName.getText(), role);
             registrationInfo.setText("Registration successful");

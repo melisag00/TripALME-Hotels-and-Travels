@@ -64,10 +64,30 @@ public class LoginController {
                 JSONObject obj = it.next();
                 if (obj.get("username").equals(compare.get("usernameF")) && obj.get("role").equals(compare.get("RoleM")) && obj.get("password").equals(compare.get("passwordF"))) {
                     loginMessage.setText("Login as a manager!");
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Manager.fxml"));
+                        Parent root1 = (Parent) fxmlLoader.load();
+                        Stage stage = new Stage();
+                        stage.setTitle("");
+                        stage.setScene(new Scene(root1));
+                        stage.show();
+                    } catch (Exception e) {
+                        System.out.println("Cant load the window");
+                    }
                     break;
                 }
                 if (obj.get("username").equals(compare.get("usernameF")) && obj.get("role").equals(compare.get("RoleC")) && obj.get("password").equals(compare.get("passwordF"))) {
                     loginMessage.setText("Login as a client!");
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Client.fxml"));
+                        Parent root1 = (Parent) fxmlLoader.load();
+                        Stage stage = new Stage();
+                        stage.setTitle("");
+                        stage.setScene(new Scene(root1));
+                        stage.show();
+                    } catch (Exception e) {
+                        System.out.println("Cant load the window");
+                    }
                     break;
                 }
                 if (!obj.get("username").equals(compare.get("usernameF")) && obj.get("password").equals(compare.get("passwordF"))) {
