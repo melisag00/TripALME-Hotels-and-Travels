@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -25,17 +26,36 @@
       </Text>
       <TextField fx:id="number" layoutX="180.0" layoutY="70.0" />
       <TextField fx:id="price" layoutX="179.0" layoutY="103.0" prefHeight="26.0" prefWidth="149.0" />
+      <Text fill="#fff6f6" layoutX="31.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="149.3367919921875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="category" layoutX="179.0" layoutY="211.0" prefHeight="26.0" prefWidth="150.0" />
       <TextField fx:id="description" alignment="TOP_LEFT" layoutX="179.0" layoutY="137.0" prefHeight="66.0" prefWidth="331.0" />
       <Button fx:id="closeButton" layoutX="253.0" layoutY="485.0" mnemonicParsing="false" onAction="#Done" prefHeight="26.0" prefWidth="119.0" text="Done" />
+      <Text fx:id="screen" fill="WHITE" layoutX="106.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="414.13670349121094">
+         <font>
+            <Font name="System Italic" size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="333.0" layoutY="211.0" mnemonicParsing="false" onAction="#Display" prefHeight="26.0" prefWidth="138.0" text="View description" />
       <Text fx:id="mess" fill="WHITE" layoutX="198.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="230.93670654296875">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
+      <TextField fx:id="newcategory" layoutX="179.0" layoutY="259.0" prefHeight="29.0" prefWidth="119.0" promptText="NAME" />
       <Text fill="WHITE" layoutX="344.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEI" wrappingWidth="31.7366943359375">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
+      <Text fill="#f5eded" layoutX="31.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New category" wrappingWidth="119.20000000000005">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="newdes" alignment="TOP_LEFT" layoutX="313.0" layoutY="260.0" prefHeight="78.0" prefWidth="198.0" promptText="DESCRIPTION" />
    </children>
 </AnchorPane>
