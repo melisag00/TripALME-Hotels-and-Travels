@@ -39,7 +39,6 @@ public class UserService {
 
         }
 
-
     public static void read () {
 
         JSONParser parser1 = new JSONParser();
