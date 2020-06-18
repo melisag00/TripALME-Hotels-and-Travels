@@ -1,13 +1,13 @@
 package proiect.fis.tripALME.controller;
 
-
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import proiect.fis.tripALME.services.ClientService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,61 +16,62 @@ import java.io.IOException;
 public class ClientController {
 
     @FXML
-    private ListView<String> hotelList;
+    private AnchorPane client;
 
     @FXML
-    private ListView<String> cityList;
+    private Label requestStatus;
 
-    private static JSONArray cities = new JSONArray();
-    private static String city;
 
-    public void initialize() {
-        Object p;
+
+    private JSONArray requests;
+
+    private String requestString = "";
+
+    public void initialize(){
+
+
+        Object obj;
         JSONParser parser = new JSONParser();
         try {
-            FileReader readFile = new FileReader("src/main/java/data/city.json");
+            FileReader readFile = new FileReader("src/main/java/data/request.json");
             BufferedReader read = new BufferedReader(readFile);
-            p = parser.parse(read);
-            if (p instanceof JSONArray) {
-                cities = (JSONArray) p;
+            obj = parser.parse(read);
+            if (obj instanceof JSONArray) {
+                requests = (JSONArray) obj;
             }
 
         } catch (ParseException | IOException ex) {
             ex.printStackTrace();
         }
+        for (int i=0;i<requests.size();i++) {
 
-        cityList.getItems().addAll(cities);
-        cityList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            JSONObject o=(JSONObject) requests.get(i);
+
+            requestString = requestString + o.get("request").toString() + "\n" ;
+        }
+        requestStatus.setText(requestString);
+
+    }
+    @FXML
+    void SearchCity() {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("HotelSelection.fxml"));
+            client.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println("Cant load the window");
+        }
 
 
     }
 
     @FXML
-    public void SelectCity() {
-
-        hotelList.getItems().clear();
-
-        city = cityList.getSelectionModel().getSelectedItem();
-
-        JSONArray cityList = ClientService.displayHotels(city);
-
-        if(cityList.isEmpty()) {
-            hotelList.getItems().add("This city dosen't have any Hotel");
+    void Logout() {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+            client.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println("Cant load the window");
         }
-        else {
-            hotelList.getItems().addAll(cityList);
-        }
-
-
-
-    }
-
-    @FXML
-    public void SelectHotel() {
-
-    String hotel;
-
-    hotel = hotelList.getSelectionModel().getSelectedItem();
 
 
     }
