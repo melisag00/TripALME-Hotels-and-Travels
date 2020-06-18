@@ -43,7 +43,7 @@ public class ManagerService  {
             Iterator<JSONObject> it = jsonArray.iterator();
             while (it.hasNext()) {
                 JSONObject obj = it.next();
-                Rooms room = new Rooms (obj.get("Number").toString(),obj.get("Price").toString(),obj.get("Description").toString(), obj.get("Category").toString(), obj.get("CategDes").toString());
+                Rooms room = new Rooms (obj.get("Number").toString(),obj.get("Price").toString(),obj.get("Description").toString(), obj.get("Category").toString(), obj.get("CategDes").toString(), obj.get("UserName").toString());
                 rooms.add(room);
             }
         } catch (IOException e) {
@@ -53,7 +53,7 @@ public class ManagerService  {
         }
 
     }
-    public static void addRooms(String number, String price, String description, String newcategory, String newdescription){
+    public static void addRooms(String number, String price, String description, String newcategory, String newdescription, String username){
 
         loadRoomsFromFile();
         read();
@@ -63,6 +63,7 @@ public class ManagerService  {
         rooms.put("Description", description);
         rooms.put("Category", newcategory);
         rooms.put("CategDes", newdescription);
+        rooms.put("UserName", username);
         roomsList.add(rooms);
 
 

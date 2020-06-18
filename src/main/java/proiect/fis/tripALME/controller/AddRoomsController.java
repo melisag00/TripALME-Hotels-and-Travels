@@ -7,9 +7,18 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import proiect.fis.tripALME.services.ManagerService;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -71,6 +80,8 @@ public class AddRoomsController implements Initializable {
 
     @FXML
     void Done() {
+
+
         if (number.getText().isEmpty()) {
             mess.setText("Empty filed");
             return;
@@ -98,10 +109,24 @@ public class AddRoomsController implements Initializable {
             return;
         }
 
+        JSONParser parser1 = new JSONParser();
+        JSONObject list = new JSONObject();
+        String username = "";
+
+        try (Reader reader = new FileReader("src/main/java/data/logininfo.json")) {
+            JSONObject jsonArray = (JSONObject) parser1.parse(reader);
+                 list = jsonArray;
+                 username = list.get("username").toString();
+            }
+         catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         if (!newcategory.getText().isEmpty() && x == null) {
             try {
-                ManagerService.addRooms(number.getText(), price.getText(), description.getText(), newcategory.getText(), newdes.getText());
+                ManagerService.addRooms(number.getText(), price.getText(), description.getText(), newcategory.getText(), newdes.getText(), username);
             } catch (Exception e) {
                 System.out.println("error");
             }
@@ -116,7 +141,7 @@ public class AddRoomsController implements Initializable {
 
         if (newcategory.getText().isEmpty() && x != null) {
             try {
-                ManagerService.addRooms(number.getText(), price.getText(), description.getText(), x, screen.getText());
+                ManagerService.addRooms(number.getText(), price.getText(), description.getText(), x, screen.getText(),username);
             } catch (Exception e) {
                 System.out.println("error");
             }
@@ -141,7 +166,7 @@ public class AddRoomsController implements Initializable {
 
         if (!newcategory.getText().isEmpty() && x == "None") {
             try {
-                ManagerService.addRooms(number.getText(), price.getText(), description.getText(), newcategory.getText(), newdes.getText());
+                ManagerService.addRooms(number.getText(), price.getText(), description.getText(), newcategory.getText(), newdes.getText(), username);
             } catch (Exception e) {
                 System.out.println("error");
             }

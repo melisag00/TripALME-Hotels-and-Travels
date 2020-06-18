@@ -23,6 +23,7 @@ public class ClientController {
 
     private static JSONArray cities = new JSONArray();
     private static String city;
+
     public void initialize() {
         Object p;
         JSONParser parser = new JSONParser();

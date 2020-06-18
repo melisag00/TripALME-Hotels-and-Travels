@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.security.MessageDigest;
@@ -33,7 +34,7 @@ public class LoginController {
     private Text loginMessage;
 
     @FXML
-    void LoginButton(ActionEvent event) {
+    void LoginButton() {
 
 
         String user = usernameF.getText();
@@ -99,7 +100,14 @@ public class LoginController {
                     break;
                 }
 
-                //System.out.println("Name: " + obj.get("username") + "  -  " + "Password: " + obj.get("password"));
+
+            }
+            try (FileWriter file = new FileWriter("src/main/java/data/logininfo.json")){
+                JSONObject loginInfo = new JSONObject();
+                loginInfo.put("username",user);
+                loginInfo.put("password",HashPassword(pass));
+                file.write(loginInfo.toJSONString());
+                file.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
