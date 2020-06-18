@@ -1,18 +1,17 @@
 package proiect.fis.tripALME.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -31,6 +30,10 @@ public class LoginController {
 
     @FXML
     private Text loginMessage;
+
+
+    @FXML
+    private AnchorPane login;
 
     @FXML
     void LoginButton(ActionEvent event) {
@@ -65,12 +68,8 @@ public class LoginController {
                 if (obj.get("username").equals(compare.get("usernameF")) && obj.get("role").equals(compare.get("RoleM")) && obj.get("password").equals(compare.get("passwordF"))) {
                     loginMessage.setText("Login as a manager!");
                     try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Manager.fxml"));
-                        Parent root1 = (Parent) fxmlLoader.load();  
-                        Stage stage = new Stage();
-                        stage.setTitle("");
-                        stage.setScene(new Scene(root1));
-                        stage.show();
+                        AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Manager.fxml"));
+                        login.getChildren().setAll(pane);
                     } catch (Exception e) {
                         System.out.println("Cant load the window");
                     }
@@ -79,13 +78,11 @@ public class LoginController {
                 if (obj.get("username").equals(compare.get("usernameF")) && obj.get("role").equals(compare.get("RoleC")) && obj.get("password").equals(compare.get("passwordF"))) {
                     loginMessage.setText("Login as a client!");
                     try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Client.fxml"));
-                        Parent root1 = (Parent) fxmlLoader.load();
-                        Stage stage = new Stage();
-                        stage.setTitle("");
-                        stage.setScene(new Scene(root1));
-                        stage.show();
+                        AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Client.fxml"));
+                        login.getChildren().setAll(pane);
+
                     } catch (Exception e) {
+                        System.out.println(e);
                         System.out.println("Cant load the window");
                     }
                     break;
@@ -99,7 +96,6 @@ public class LoginController {
                     break;
                 }
 
-                //System.out.println("Name: " + obj.get("username") + "  -  " + "Password: " + obj.get("password"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -128,14 +124,12 @@ public class LoginController {
 
     public void Register(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Registration.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Registration");
-            stage.setScene(new Scene(root1));
-            stage.show();
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Registration.fxml"));
+            login.getChildren().setAll(pane);
         } catch (Exception e) {
             System.out.println("Cant load the window");
         }
     }
+
+
 }

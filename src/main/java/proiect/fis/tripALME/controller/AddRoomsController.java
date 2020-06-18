@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import proiect.fis.tripALME.services.ManagerService;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,8 @@ public class AddRoomsController implements Initializable {
     }
 
     void loadData() {
+
+
         List<String> list = new ArrayList<String>();
 
         list.removeAll(list);

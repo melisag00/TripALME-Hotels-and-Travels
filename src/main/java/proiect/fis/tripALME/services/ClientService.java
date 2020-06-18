@@ -6,9 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import proiect.fis.tripALME.model.User;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
@@ -16,7 +14,7 @@ import java.util.Objects;
 public class ClientService extends UserService {
 
     private static ArrayList<User> clients = new ArrayList<>();
-
+    private static JSONArray requests = new JSONArray();
 
     public static void read() {
 
@@ -52,5 +50,45 @@ public class ClientService extends UserService {
         clients.clear();
             return hotels;
 
+    }
+
+
+    public static void  loadUsersFromFile()  {
+
+        Object p;
+        JSONParser parser = new JSONParser();
+        try{
+            FileReader readFile = new FileReader("src/main/java/data/request.json");
+            BufferedReader read = new BufferedReader(readFile);
+            p = parser.parse(read);
+            if(p instanceof JSONArray)
+            {
+                requests =(JSONArray)p;
+            }
+
+        } catch (ParseException | IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+    public static boolean writeRequest(String request){
+
+        loadUsersFromFile();
+        JSONObject userRequest = new JSONObject();
+        userRequest.put("request",request);
+
+        requests.add(userRequest);
+
+        try (FileWriter file = new FileWriter("src/main/java/data/request.json")) {
+
+
+            file.write(requests.toString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
