@@ -98,8 +98,9 @@ public class RoomSelectionController {
                 selection = roomList.getSelectionModel().getSelectedItem();
                 checkinDate = checkin.getText();
                 checkoutDate = checkout.getText();
+                String s = HotelSelectionController.getHotelSelection();
 
-                if (ClientService.writeRequest(selection, checkinDate, checkoutDate, username)) {
+                if (ClientService.writeRequest(selection, checkinDate, checkoutDate, username, s)) {
                     message.setText("Request successful");
                 } else {
                     message.setText("Request failed");

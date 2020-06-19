@@ -38,6 +38,16 @@ public class ManagerController {
         } catch (Exception e) {
             System.out.println("Cant load the window");
         }
-
     }
+
+    @FXML
+    void Request() {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Request.fxml"));
+            go.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println("Cant load the window");
+        }
+    }
+
 }

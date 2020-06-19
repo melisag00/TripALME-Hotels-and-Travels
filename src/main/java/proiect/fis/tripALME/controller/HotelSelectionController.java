@@ -39,6 +39,12 @@ public class HotelSelectionController {
     private  String citySelected;
     private String errorMessage = "This city dosen't have any Hotel";
 
+    public static String getHotelSelection() {
+        return hotelSelection;
+    }
+
+    private static String hotelSelection;
+
     public void initialize() {
         Object p;
         JSONParser parser = new JSONParser();
@@ -85,7 +91,7 @@ public class HotelSelectionController {
     @FXML
     public void SelectHotel() {
 
-        String hotelSelection;
+
 
 
 
