@@ -3,9 +3,9 @@ package proiect.fis.tripALME.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -25,13 +25,19 @@ public class HotelSelectionController {
     private ListView<String> cityList;
 
     @FXML
-    private TextArea status;
+    private Label city;
+
+    @FXML
+    private Label hotel;
+
+
 
     @FXML
     private AnchorPane client;
 
-    private static JSONArray rooms = new JSONArray();
-    private static String city;
+    private  JSONArray rooms = new JSONArray();
+    private  String citySelected;
+    private String errorMessage = "This city dosen't have any Hotel";
 
     public void initialize() {
         Object p;
@@ -58,35 +64,46 @@ public class HotelSelectionController {
     public void SelectCity() {
 
         hotelList.getItems().clear();
-
-        city = cityList.getSelectionModel().getSelectedItem();
-
-        JSONArray cityList = ClientService.displayHotels(city);
-
-        if (cityList.isEmpty()) {
-            hotelList.getItems().add("This city dosen't have any Hotel");
-        } else {
-            hotelList.getItems().addAll(cityList);
+        if(cityList.getSelectionModel().getSelectedItem() == null){
+            city.setText("You should select a city");
         }
+        else {
+            citySelected = cityList.getSelectionModel().getSelectedItem();
 
 
+            JSONArray cityList = ClientService.displayHotels(citySelected);
+
+            if (cityList.isEmpty()) {
+                hotelList.getItems().add(errorMessage);
+            } else {
+                hotelList.getItems().addAll(cityList);
+            }
+
+        }
     }
 
     @FXML
     public void SelectHotel() {
 
-        String hotel;
+        String hotelSelection;
 
-        hotel = hotelList.getSelectionModel().getSelectedItem();
 
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("RoomSelection.fxml"));
-            client.getChildren().setAll(pane);
-        } catch (Exception e) {
-            System.out.println("Cant load the window");
+
+        if(hotelList.getSelectionModel().getSelectedItem() == errorMessage || hotelList.getSelectionModel().getSelectedItem() == null) {
+            hotel.setText("You should select a hotel");
         }
+        else {
+            hotelSelection = hotelList.getSelectionModel().getSelectedItem();
 
+            try {
+                AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("RoomSelection.fxml"));
+                client.getChildren().setAll(pane);
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("Cant load the window");
+            }
 
+        }
     }
 
 
