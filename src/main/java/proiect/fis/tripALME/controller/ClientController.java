@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 
 public class ClientController {
 
@@ -27,8 +28,24 @@ public class ClientController {
 
     private String requestString = "";
 
-    public void initialize(){
+    private String username;
 
+    private JSONObject user;
+
+    private JSONParser parseruser = new JSONParser();
+
+    public void initialize(){
+        try (Reader reader = new FileReader("src/main/java/data/logininfo.json")) {
+            JSONObject json = (JSONObject) parseruser.parse(reader);
+            user = json;
+            username = user.get("username").toString();
+           // System.out.println(username);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Object obj;
         JSONParser parser = new JSONParser();
@@ -45,9 +62,12 @@ public class ClientController {
         }
         for (int i=0;i<requests.size();i++) {
 
+
             JSONObject o=(JSONObject) requests.get(i);
 
-            requestString = requestString + o.get("request").toString() + " " + o.get("status").toString() + "\n" ;
+            if(username.equals(o.get("username"))) {
+                requestString = requestString + o.get("request").toString() + " " + o.get("status").toString() + "\n";
+            }
         }
         requestStatus.setText(requestString);
 
