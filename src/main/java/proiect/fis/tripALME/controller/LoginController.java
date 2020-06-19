@@ -82,7 +82,6 @@ public class LoginController {
                         login.getChildren().setAll(pane);
 
                     } catch (Exception e) {
-                        System.out.println(e);
                         System.out.println("Cant load the window");
                     }
                     break;

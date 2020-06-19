@@ -47,7 +47,7 @@ public class ClientController {
 
             JSONObject o=(JSONObject) requests.get(i);
 
-            requestString = requestString + o.get("request").toString() + "\n" ;
+            requestString = requestString + o.get("request").toString() + " " + o.get("status").toString() + "\n" ;
         }
         requestStatus.setText(requestString);
 

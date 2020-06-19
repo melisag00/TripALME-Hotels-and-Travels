@@ -71,13 +71,17 @@ public class ClientService extends UserService {
         }
 
     }
-    public static boolean writeRequest(String request){
+    public static boolean writeRequest(String request, String checkin, String checkout){
 
         loadUsersFromFile();
         JSONObject userRequest = new JSONObject();
         userRequest.put("request",request);
+        userRequest.put("checkin", checkin);
+        userRequest.put("checkout", checkout);
+        userRequest.put("status", "Pending");
 
         requests.add(userRequest);
+
 
         try (FileWriter file = new FileWriter("src/main/java/data/request.json")) {
 
