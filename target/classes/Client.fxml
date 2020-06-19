@@ -6,9 +6,9 @@
 
 <AnchorPane fx:id="client" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.tripALME.controller.ClientController">
     <children>
-        <Label alignment="CENTER" layoutX="406.0" layoutY="53.0" prefHeight="17.0" prefWidth="124.0" text="Request Status" />
-        <Button layoutX="125.0" layoutY="237.0" mnemonicParsing="false" onAction="#SearchCity" text="Search City" />
-        <Button layoutX="29.0" layoutY="28.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
-        <Label fx:id="requestStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="358.0" layoutY="90.0" prefHeight="220.0" prefWidth="221.0" />
+        <Label alignment="CENTER" layoutX="322.0" layoutY="31.0" prefHeight="17.0" prefWidth="124.0" text="Request Status" />
+        <Button layoutX="135.0" layoutY="298.0" mnemonicParsing="false" onAction="#SearchCity" text="Search City" />
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+        <Label fx:id="requestStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="90.0" prefHeight="304.0" prefWidth="221.0" />
     </children>
 </AnchorPane>

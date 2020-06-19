@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.json.simple.JSONArray;
@@ -20,6 +21,11 @@ import java.util.ArrayList;
 
 public class RoomSelectionController {
 
+        @FXML
+        private TextField checkin;
+
+        @FXML
+        private TextField checkout;
 
         @FXML
         private Text message;
@@ -31,7 +37,9 @@ public class RoomSelectionController {
         private AnchorPane RoomSelection;
 
 
-    private  String selection;
+    private  String selection = "";
+    private String checkinDate;
+    private String checkoutDate;
     private static ArrayList list;
 
 
@@ -58,7 +66,7 @@ public class RoomSelectionController {
             roomList.getItems().add(obj.get("Number").toString() + "  " + obj.get("Category").toString() + "  " + obj.get("Price").toString());
         }
 
-        roomList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+      roomList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
     }
 
@@ -66,15 +74,23 @@ public class RoomSelectionController {
 
     @FXML
     void Select() {
-
-        selection = roomList.getSelectionModel().getSelectedItem();
-        if(ClientService.writeRequest(selection)){
-            message.setText("Request successful");
+        if(roomList.getSelectionModel().getSelectedItem() == null){
+            message.setText("Please select a room and a checkin/checkout period");
         }
         else {
-            message.setText("Request failed");
-        }
 
+
+
+                selection = roomList.getSelectionModel().getSelectedItem();
+                checkinDate = checkin.getText();
+                checkoutDate = checkout.getText();
+
+                if (ClientService.writeRequest(selection, checkinDate, checkoutDate)) {
+                    message.setText("Request successful");
+                } else {
+                    message.setText("Request failed");
+                }
+        }
     }
 
 
