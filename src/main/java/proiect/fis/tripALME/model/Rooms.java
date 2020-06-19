@@ -6,13 +6,15 @@ public class Rooms {
     private String descriprion;
     private String newcategory;
     private String newdescription;
+    private String username;
 
-    public Rooms(String descriprion, String price, String number, String newcategory, String newdescription) {
+    public Rooms(String descriprion, String price, String number, String newcategory, String newdescription, String username) {
         this.descriprion = descriprion;
         this.price = price;
         this.number = number;
         this.newcategory = newcategory;
         this.newdescription = newdescription;
+        this.username = username;
     }
 
     public String getDescriprion() {
@@ -37,6 +39,14 @@ public class Rooms {
 
     public String getNewdescription() {
         return newdescription;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setNewdescription(String newdescription) {
