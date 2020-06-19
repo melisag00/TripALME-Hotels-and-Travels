@@ -1,24 +1,21 @@
 package proiect.fis.tripALME.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import proiect.fis.tripALME.services.ManagerService;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,11 +43,13 @@ public class AddRoomsController implements Initializable {
     @FXML
     private Text screen;
 
-    @FXML
-    private Button closeButton;
 
     @FXML
     private TextField newdes;
+
+    @FXML
+    private AnchorPane back;
+
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -127,31 +126,19 @@ public class AddRoomsController implements Initializable {
         if (!newcategory.getText().isEmpty() && x == null) {
             try {
                 ManagerService.addRooms(number.getText(), price.getText(), description.getText(), newcategory.getText(), newdes.getText(), username);
+                mess.setText("Successfully completed");
             } catch (Exception e) {
                 System.out.println("error");
             }
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            long Time = System.currentTimeMillis();
-            long endd = Time + 400;
-            while (Time < endd) {
-                Time = System.currentTimeMillis();
             }
-            stage.close();
-        }
 
         if (newcategory.getText().isEmpty() && x != null) {
             try {
                 ManagerService.addRooms(number.getText(), price.getText(), description.getText(), x, screen.getText(),username);
+                mess.setText("Successfully completed");
             } catch (Exception e) {
                 System.out.println("error");
             }
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            long mTime = System.currentTimeMillis();
-            long end = mTime + 300;
-            while (mTime < end) {
-                mTime = System.currentTimeMillis();
-            }
-            stage.close();
         }
 
         if (newcategory.getText().isEmpty() && x == null) {
@@ -167,16 +154,10 @@ public class AddRoomsController implements Initializable {
         if (!newcategory.getText().isEmpty() && x == "None") {
             try {
                 ManagerService.addRooms(number.getText(), price.getText(), description.getText(), newcategory.getText(), newdes.getText(), username);
+                mess.setText("Successfully completed");
             } catch (Exception e) {
                 System.out.println("error");
             }
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            long mTime = System.currentTimeMillis();
-            long end = mTime + 300;
-            while (mTime < end) {
-                mTime = System.currentTimeMillis();
-            }
-            stage.close();
         }
     }
 
@@ -206,7 +187,16 @@ public class AddRoomsController implements Initializable {
             screen.setText("A room with two double (or perhaps queen) beds. May be occupied by one or more people.");
         } }
 
-}
+    @FXML
+    void Back() {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Manager.fxml"));
+            back.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println("Cant load the window");
+        }
+    }
+    }
 
 
 
