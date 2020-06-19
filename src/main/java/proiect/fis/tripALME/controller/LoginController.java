@@ -52,6 +52,16 @@ public class LoginController {
         JSONParser parser = new JSONParser();
         JSONObject compare = new JSONObject();
 
+        try (FileWriter file = new FileWriter("src/main/java/data/logininfo.json")){
+            JSONObject loginInfo = new JSONObject();
+            loginInfo.put("username",user);
+            loginInfo.put("password",HashPassword(pass));
+            file.write(loginInfo.toJSONString());
+            file.flush();
+        }  catch (IOException e) {
+        e.printStackTrace();
+        }
+
         if (user == null || user.isEmpty()) {
             loginMessage.setText("Please type in a username!");
             return;
@@ -61,6 +71,7 @@ public class LoginController {
             loginMessage.setText("Password cannot be empty!");
             return;
         }
+
         try (Reader reader = new FileReader("src/main/java/data/data.json")) {
             JSONArray jsonArray = (JSONArray) parser.parse(reader);
             compare.put("usernameF", user);
@@ -100,13 +111,8 @@ public class LoginController {
 
 
             }
-            try (FileWriter file = new FileWriter("src/main/java/data/logininfo.json")){
-                JSONObject loginInfo = new JSONObject();
-                loginInfo.put("username",user);
-                loginInfo.put("password",HashPassword(pass));
-                file.write(loginInfo.toJSONString());
-                file.flush();
-            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -134,12 +140,8 @@ public class LoginController {
 
     public void Register(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Registration.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Registration");
-            stage.setScene(new Scene(root1));
-            stage.show();
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Registration.fxml"));
+            go.getChildren().setAll(pane);
         } catch (Exception e) {
             System.out.println("Cant load the window");
         }

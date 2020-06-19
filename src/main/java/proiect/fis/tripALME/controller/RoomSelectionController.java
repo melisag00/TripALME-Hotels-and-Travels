@@ -41,9 +41,23 @@ public class RoomSelectionController {
     private String checkinDate;
     private String checkoutDate;
     private static ArrayList list;
-
+    private String username;
+    private JSONObject user;
+    private JSONParser parseruser = new JSONParser();;
 
     public void initialize() {
+
+        try (Reader reader1 = new FileReader("src/main/java/data/logininfo.json")) {
+            JSONObject json = (JSONObject) parseruser.parse(reader1);
+            user = json;
+            username = user.get("username").toString();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         JSONParser parser1 = new JSONParser();
 
         try (Reader reader = new FileReader("src/main/java/data/rooms.json")) {
@@ -85,7 +99,7 @@ public class RoomSelectionController {
                 checkinDate = checkin.getText();
                 checkoutDate = checkout.getText();
 
-                if (ClientService.writeRequest(selection, checkinDate, checkoutDate)) {
+                if (ClientService.writeRequest(selection, checkinDate, checkoutDate, username)) {
                     message.setText("Request successful");
                 } else {
                     message.setText("Request failed");

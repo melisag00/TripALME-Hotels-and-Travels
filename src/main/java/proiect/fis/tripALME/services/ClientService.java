@@ -71,7 +71,7 @@ public class ClientService extends UserService {
         }
 
     }
-    public static boolean writeRequest(String request, String checkin, String checkout){
+    public static boolean writeRequest(String request, String checkin, String checkout, String username){
 
         loadUsersFromFile();
         JSONObject userRequest = new JSONObject();
@@ -79,6 +79,7 @@ public class ClientService extends UserService {
         userRequest.put("checkin", checkin);
         userRequest.put("checkout", checkout);
         userRequest.put("status", "Pending");
+        userRequest.put("username", username);
 
         requests.add(userRequest);
 
