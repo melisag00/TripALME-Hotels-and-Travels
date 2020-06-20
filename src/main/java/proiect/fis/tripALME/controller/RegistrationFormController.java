@@ -19,46 +19,46 @@ import java.io.IOException;
 public class RegistrationFormController {
 
     @FXML
-    private TextField username;
+     TextField username;
 
     @FXML
-    private TextField password;
+     TextField password;
 
     @FXML
-    private TextField email;
+     TextField email;
 
     @FXML
-    private ListView<String> address;
+     ListView<String> address;
 
     @FXML
-    private TextField hotelName;
+     TextField hotelName;
 
     @FXML
-    private Label usernameLabel;
+     Label usernameLabel;
 
     @FXML
-    private Label passwordLabel;
+     Label passwordLabel;
 
     @FXML
-    private Label emailLable;
+     Label emailLable;
 
     @FXML
-    private Label addressLable;
+     Label addressLable;
 
     @FXML
-    private Label hotelNameLable;
+     Label hotelNameLable;
 
     @FXML
-    private Label registrationInfo;
+     Label registrationInfo;
 
     @FXML
-    private CheckBox id_Client;
+     CheckBox id_Client;
 
     @FXML
-    private CheckBox id_Hotel;
+     CheckBox id_Hotel;
 
     @FXML
-    private AnchorPane register;
+    AnchorPane register;
 
 
     private boolean emptyField;
