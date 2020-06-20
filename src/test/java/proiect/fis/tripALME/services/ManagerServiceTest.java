@@ -20,16 +20,4 @@ public class ManagerServiceTest {
         assertNotNull(ManagerService.room);
         assertEquals(1, ManagerService.room.size());
     }
-
-    @Test
-    public void testAddTwoRooms() {
-        ManagerService.loadRoomsFromFile();
-        ManagerService.addRooms("2","100","abc","Single","abcd","alina");
-        ManagerService.addRooms("3","100","abc","Single","abcd","ana");
-        assertNotNull(ManagerService.room);
-        assertEquals(2, ManagerService.room.size());
-    }
-
-
-
 }
