@@ -115,7 +115,7 @@ public class LoginController {
         }
     }
 
-    private static String HashPassword(String pass) {
+    public static String HashPassword(String pass) {
         String passwordToHash = pass;
         String generatedPassword = null;
         try {

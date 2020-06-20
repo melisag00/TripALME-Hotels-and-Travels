@@ -10,11 +10,13 @@ import proiect.fis.tripALME.model.Rooms;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ManagerService  {
 
     private static JSONArray roomsList = new JSONArray();
     private static ArrayList<Rooms> rooms = new ArrayList<>();
+    static List <Rooms> room;
 
     public static void  loadRoomsFromFile()  {
 
@@ -26,7 +28,8 @@ public class ManagerService  {
             p = parser.parse(read);
             if(p instanceof JSONArray)
             {
-                roomsList =(JSONArray)p;
+                roomsList = (JSONArray)p;
+                room = (JSONArray)p;
             }
 
         } catch (ParseException | IOException ex) {
@@ -34,29 +37,9 @@ public class ManagerService  {
         }
 
     }
-    public static void read () {
-        JSONParser parser1 = new JSONParser();
 
-        try (Reader reader = new FileReader("src/main/java/data/rooms.json")) {
-            JSONArray jsonArray = (JSONArray) parser1.parse(reader);
-
-            Iterator<JSONObject> it = jsonArray.iterator();
-            while (it.hasNext()) {
-                JSONObject obj = it.next();
-                Rooms room = new Rooms (obj.get("Number").toString(),obj.get("Price").toString(),obj.get("Description").toString(), obj.get("Category").toString(), obj.get("CategDes").toString(), obj.get("UserName").toString());
-                rooms.add(room);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-    }
     public static void addRooms(String number, String price, String description, String newcategory, String newdescription, String username){
-
         loadRoomsFromFile();
-        read();
         JSONObject rooms = new JSONObject();
         rooms.put("Number", number);
         rooms.put("Price", price);
@@ -76,5 +59,4 @@ public class ManagerService  {
             e.printStackTrace();
         }
     }
-
 }
