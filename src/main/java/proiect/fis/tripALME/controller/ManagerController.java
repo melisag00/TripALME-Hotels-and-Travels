@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 public class ManagerController {
 
-
-
     @FXML
     private AnchorPane go;
 

@@ -35,8 +35,6 @@ public class LoginController {
     @FXML
     private Text loginMessage;
 
-    @FXML
-    private Button closeButton;
 
     @FXML
     private AnchorPane go;
@@ -108,10 +106,7 @@ public class LoginController {
                     loginMessage.setText("Incorrect login, reenter the credentials!");
                     break;
                 }
-
-
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();
