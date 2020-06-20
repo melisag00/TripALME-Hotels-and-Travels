@@ -66,7 +66,7 @@ public class ClientController {
             JSONObject o=(JSONObject) requests.get(i);
 
             if(username.equals(o.get("username"))) {
-                requestString = requestString + o.get("request").toString() + " " + o.get("status").toString() + "\n";
+                requestString = requestString + "Room: " + o.get("request").toString() + "Status: " + o.get("status").toString() + "\n";
             }
         }
         requestStatus.setText(requestString);

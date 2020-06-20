@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
-        primaryStage.setTitle("Log in");
         primaryStage.setScene(new Scene(root, 600,520 ));
         primaryStage.show();
     }
@@ -17,9 +16,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
-
-
-
-
-
