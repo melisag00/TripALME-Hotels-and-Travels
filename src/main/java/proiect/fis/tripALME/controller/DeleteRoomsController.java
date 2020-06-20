@@ -22,13 +22,16 @@ public class DeleteRoomsController {
     private AnchorPane close;
     
     ArrayList<String> list = new ArrayList<String>();
+
     ArrayList<String> list1 = new ArrayList<String>();
+
     JSONParser parser1 = new JSONParser();
 
     JSONObject list11 = new JSONObject();
 
-    String username = "";
-    String x;
+    private String username = "";
+
+    private String x;
 
     public void initialize() {
 
