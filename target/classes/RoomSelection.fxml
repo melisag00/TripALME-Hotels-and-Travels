@@ -14,8 +14,8 @@
       <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#Back" text="Back" />
       <Label layoutX="331.0" layoutY="46.0" text="Check-in" />
       <Label layoutX="331.0" layoutY="117.0" text="Check-out" />
-      <TextField fx:id="checkin" layoutX="331.0" layoutY="74.0" promptText="zz/ll/yyyy" />
-      <TextField fx:id="checkout" layoutX="331.0" layoutY="142.0" promptText="zz/ll/yyyy" />
+      <TextField fx:id="checkin" layoutX="331.0" layoutY="74.0" promptText="zz.ll.yyyy" />
+      <TextField fx:id="checkout" layoutX="331.0" layoutY="142.0" promptText="zz.ll.yyyy" />
       <Text fx:id="message" layoutX="331.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="137.13671875" />
    </children>
 </AnchorPane>
