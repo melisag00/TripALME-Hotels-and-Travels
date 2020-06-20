@@ -48,8 +48,8 @@ public class RequestController {
     private String user = "";
     private String hotel = "";
     private String data = "";
-    private String hotelul = "";
-    private  JSONArray requests = new JSONArray();
+    private String hotel1 = "";
+    private JSONArray requests = new JSONArray();
 
     public void initialize() {
         JSONObject list11 = new JSONObject();
@@ -57,8 +57,7 @@ public class RequestController {
             JSONObject json = (JSONObject) parser1.parse(reader);
             list11 = json;
             username = list11.get("username").toString();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
@@ -68,8 +67,8 @@ public class RequestController {
             Iterator<JSONObject> it = jsonArray.iterator();
             while (it.hasNext()) {
                 JSONObject obj = it.next();
-                    user = obj.get("username").toString();
-                if(user.equals(username))
+                user = obj.get("username").toString();
+                if (user.equals(username))
                     hotel = obj.get("hotelName").toString();
             }
         } catch (IOException e) {
@@ -85,7 +84,7 @@ public class RequestController {
                 JSONObject obj = it.next();
                 String a = obj.get("Number").toString();
                 String b = obj.get("UserName").toString();
-                if(b.equals(username))
+                if (b.equals(username))
                     list.add(a);
             }
         } catch (IOException e) {
@@ -104,8 +103,10 @@ public class RequestController {
                 JSONObject obj = it.next();
                 String x = obj.get("request").toString();
                 String y = obj.get("hotel").toString();
-                if(y.equals(hotel))
-                    list1.add(x);
+                String z = obj.get("status").toString();
+                if (z.equals("Pending"))
+                    if (y.equals(hotel))
+                        list1.add(x);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,21 +123,24 @@ public class RequestController {
         String x = check.getText();
         try (Reader reader = new FileReader("src/main/java/data/request.json")) {
             JSONArray jsonArray = (JSONArray) parser1.parse(reader);
-            for (int i=0;i<jsonArray.size();i++) {
+            for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject o = (JSONObject) jsonArray.get(i);
-                if (o.get("request").equals(x))
-                {  message.setText("The room is available");
-                break;}
-                else
-                {  message.setText("The room is not available");
-                break;}
-            }
+                if (o.get("request").equals(x)) {
+                    message.setText("The room is available");
+                    break;
+                } else {
+                    message.setText("The room is not available");
+                    continue;
+                }
 
-        } catch (IOException e) {
+            }
+        }
+        catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -146,9 +150,9 @@ public class RequestController {
         Iterator<JSONObject> it = requests.iterator();
         while (it.hasNext()) {
             JSONObject obj = it.next();
-             if(obj.get("request").equals(x)){
-                 obj.put("status","Accepted");
-             }
+            if (obj.get("request").equals(x)) {
+                obj.put("status", "Accepted");
+            }
         }
         try (FileWriter file = new FileWriter("src/main/java/data/request.json")) {
             file.write(requests.toString());
@@ -158,7 +162,8 @@ public class RequestController {
         }
         int index = List1.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-            List1.getItems().remove(index);}
+            List1.getItems().remove(index);
+        }
     }
 
 
@@ -168,8 +173,8 @@ public class RequestController {
         Iterator<JSONObject> it = requests.iterator();
         while (it.hasNext()) {
             JSONObject obj = it.next();
-            if(obj.get("request").equals(x)){
-                obj.put("status","Rejected");
+            if (obj.get("request").equals(x)) {
+                obj.put("status", "Rejected");
             }
         }
         try (FileWriter file = new FileWriter("src/main/java/data/request.json")) {
@@ -181,7 +186,8 @@ public class RequestController {
 
         int index = List1.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-            List1.getItems().remove(index);}
+            List1.getItems().remove(index);
+        }
     }
 
 
@@ -198,31 +204,42 @@ public class RequestController {
             while (it.hasNext()) {
                 JSONObject obj = it.next();
                 data = obj.get("checkout").toString();
-                hotelul  = obj.get("hotel").toString();
+                hotel1 = obj.get("hotel").toString();
 
-                if(hotelul.equals(hotel)) {
-                    System.out.println(data);
+                if (hotel1.equals(hotel)) {
                     sdf = new SimpleDateFormat("dd.MM.yyyy");
                     strDate = sdf.parse(data);
 
                     if (new Date().after(strDate)) {
+                        obj.replace("checkout","33.33.3333");
                         mess.setText("You have notifications!");
                         Notifications.create()
                                 .title("This room can be used again")
                                 .text(obj.get("request").toString())
                                 .position(Pos.TOP_CENTER)
                                 .showInformation();
+                        break;
+                    } else {
+                        continue;
                     }
                 }
             }
-        }
-        catch (FileNotFoundException | ParseException e) {
+
+                try (FileWriter file = new FileWriter("src/main/java/data/request.json")) {
+                    file.write(json.toString());
+                    file.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+        }catch (FileNotFoundException | ParseException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
+
 
 
     @FXML

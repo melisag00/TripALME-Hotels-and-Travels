@@ -66,7 +66,7 @@ public class DeleteRoomsController {
 
 
     @FXML
-    void Delete() throws IOException {
+    void Delete() {
         Object y = "";
         x = roomList.getSelectionModel().getSelectedItem();
         try (Reader reader = new FileReader("src/main/java/data/rooms.json")) {
