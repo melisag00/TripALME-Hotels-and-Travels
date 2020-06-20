@@ -14,7 +14,7 @@ import java.util.Objects;
 public class ClientService extends UserService {
 
     private static ArrayList<User> clients = new ArrayList<>();
-    private static JSONArray requests = new JSONArray();
+    public static JSONArray requests = new JSONArray();
 
     public static void read() {
 
